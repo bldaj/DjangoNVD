@@ -10,24 +10,24 @@ archive_name = 'cve-{0}.json'
 
 
 def create_directory_structure():
-    if not os.path.exists('CVEs'):
-        os.mkdir('CVEs')
+    if not os.path.exists('backend/CVEs'):
+        os.mkdir('backend/CVEs')
 
-    if not os.path.exists('CVEs/Archives'):
-        os.mkdir('CVEs/Archives')
+    if not os.path.exists('backend/CVEs/Archives'):
+        os.mkdir('backend/CVEs/Archives')
 
-    if not os.path.exists('CVEs/JSONs'):
-        os.mkdir('CVEs/JSONs')
+    if not os.path.exists('backend/CVEs/JSONs'):
+        os.mkdir('backend/CVEs/JSONs')
 
 
 def read_archive(file_name: str):
-    with gzip.open('CVEs/Archives/{0}.gz'.format(file_name), 'rb') as f:
+    with gzip.open('backend/CVEs/Archives/{0}.gz'.format(file_name), 'rb') as f:
         print('Reading archive: {0}'.format(file_name + '.gz'))
         return f.read()
 
 
 def save_archive(file_name: str, content: bytes) -> None:
-    with open('CVEs/Archives/{0}.gz'.format(file_name), 'wb') as f:
+    with open('backend/CVEs/Archives/{0}.gz'.format(file_name), 'wb') as f:
         print('Saving archive: {0}'.format(file_name + '.gz'))
         f.write(content)
 
@@ -40,7 +40,7 @@ def save_json(file_name: str, content) -> None:
     else:
         raise TypeError
 
-    with open('CVEs/JSONs/{0}'.format(file_name), 'w') as f:
+    with open('backend/CVEs/JSONs/{0}'.format(file_name), 'w') as f:
         json.dump(content, f)
 
 
