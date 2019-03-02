@@ -1,18 +1,34 @@
-from django.db import models
+import peewee
+from playhouse.postgres_ext import ArrayField
+
+db = peewee.Proxy()
 
 
-class CVE(models.Model):
-    cve_id = models.CharField(max_length=15, null=False)
-    cvss_score = models.FloatField()
-    access_vector = models.CharField(max_length=50)
-    access_complexity = models.CharField(max_length=15)
-    authentication = models.CharField(max_length=15)
-    confidentiality_impact = models.CharField(max_length=15)
-    integrity_impact = models.CharField(max_length=15)
-    availability_impact = models.CharField(max_length=15)
-    source = models.CharField(max_length=50)
-    generated_datetime = models.DateTimeField()
-    cwe_id = models.CharField(max_length=15)
+class CVE(peewee.Model):
+    id = peewee.PrimaryKeyField(null=False)
+    cve_id = peewee.TextField(null=False, unique=True)
+    vendors = ArrayField(
+        peewee.TextField
+    )
+    cwes = ArrayField(
+        peewee.TextField
+    )
+    references = ArrayField(
+        peewee.TextField
+    )
+    descriptions = ArrayField(
+        peewee.TextField
+    )
+    cpes = ArrayField(
+        peewee.TextField
+    )
+    impact = peewee.TextField()
+    published_date = peewee.TextField(null=False)
+    last_modified_date = peewee.TextField(null=False)
 
     def __str__(self):
         return self.cve_id
+
+    class Meta:
+        database = db
+        table_name = 'CVE'
