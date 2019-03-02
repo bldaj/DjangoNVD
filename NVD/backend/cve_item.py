@@ -3,6 +3,9 @@ CVEItem class.
 """
 
 
+import json
+
+
 class CVEItem:
     """
     CVEItem class.
@@ -44,10 +47,12 @@ class CVEItem:
                 )
 
             self.vendors.append(
-                {
-                    'vendor': vendor.get('vendor_name', None),
-                    'products': products
-                }
+                json.dumps(
+                    {
+                        'vendor': vendor.get('vendor_name', None),
+                        'products': products
+                    }
+                )
             )
 
         del vendor_data
@@ -91,13 +96,13 @@ class CVEItem:
 
     def to_dict(self):
         return {
-            'id': self.id,
+            'cve_id': self.id,
             'vendors': self.vendors,
             'cwes': self.cwes,
             'references': self.references,
-            'description': self.descriptions,
+            'descriptions': self.descriptions,
             'cpes': self.cpes,
-            'impact': self.impact,
+            'impact': json.dumps(self.impact),
             'published_date': self.published_date,
             'last_modified_date': self.last_modified_date
         }
