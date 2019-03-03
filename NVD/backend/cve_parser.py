@@ -16,7 +16,7 @@ def parse_cve_items(cve_items: list):
 
 def get_cve_filenames():
     filenames = []
-    for dirpath, dirs, files in os.walk('CVEs/JSONs'):
+    for dirpath, dirs, files in os.walk('backend/CVEs/JSONs'):
         for file in files:
             filenames.append(os.path.join(dirpath, file))
 
