@@ -8,7 +8,8 @@ class CVE(peewee.Model):
     id = peewee.PrimaryKeyField(null=False)
     cve_id = peewee.TextField(null=False, unique=True)
     vendors = ArrayField(
-        peewee.TextField
+        peewee.TextField,
+        index_type='Hash'
     )
     cwes = ArrayField(
         peewee.TextField
