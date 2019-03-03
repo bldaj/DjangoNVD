@@ -13,7 +13,12 @@ app.config_from_object('django.conf:settings')
 app.conf.beat_schedule = {
     'downloader': {
         'task': 'backend.tasks.downloader',
-        'schedule': crontab(hour=19, minute=53),
+        'schedule': crontab(hour=1, minute=0),
         'args': ()
+    },
+    'parser': {
+        'task': 'backend.tasks.parser',
+        'schedule': crontab(hour=1, minute=0),
+        'args': {}
     }
 }
