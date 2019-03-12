@@ -1,2 +1,8 @@
 # Virtualenv
 .venv
+
+#SQLlite
+*.sqlite3
+
+#CVE files
+CVEs

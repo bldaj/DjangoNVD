@@ -1,0 +1,19 @@
+from celery import shared_task
+
+from .cve_downloader import create_directory_structure, download_and_unzip_cve_files_from_nvd
+from .cve_parser import main as cve_parser_task
+
+
+@shared_task
+def downloader():
+    print('Downloader started')
+    create_directory_structure()
+    download_and_unzip_cve_files_from_nvd()
+    print('Downloader finished')
+
+
+@shared_task
+def parser():
+    print('Parser started')
+    cve_parser_task()
+    print('Parser finished')
