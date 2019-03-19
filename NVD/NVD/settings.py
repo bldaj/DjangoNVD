@@ -25,7 +25,7 @@ SECRET_KEY = 'g075-6!59^=-)_0@l6bfozlvt9kq8-aznx(wqdze%9*@o@alt3'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['*']
 
 
 # Application definition
@@ -81,7 +81,7 @@ DATABASES = {
         'NAME': 'NVD',
         'USER': 'admin',
         'PASSWORD': '123',
-        'HOST': '127.0.0.1',
+        'HOST': 'db',
         'PORT': '5432',
     }
 }

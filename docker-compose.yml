@@ -1,0 +1,21 @@
+version: '3'
+
+services:
+  api:
+    build: .
+    container_name: nvd_api
+    command: bash -c "python src/manage.py runserver 0.0.0.0:8000"
+    volumes:
+      - ./NVD:/src
+    depends_on:
+      - db
+    ports:
+      - "8000:8000"
+
+  db:
+    image: postgres:11
+    container_name: pg_api
+    environment:
+      POSTGRES_USER: "admin"
+      POSTGRES_PASSWORD: "123"
+      POSTGRES_DB: "NVD"
