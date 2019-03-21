@@ -25,7 +25,7 @@ SECRET_KEY = 'g075-6!59^=-)_0@l6bfozlvt9kq8-aznx(wqdze%9*@o@alt3'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['*']
 
 
 # Application definition
@@ -79,9 +79,9 @@ DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
         'NAME': 'NVD',
-        'USER': 'admin',
-        'PASSWORD': '123',
-        'HOST': '127.0.0.1',
+        'USER': 'postgres',
+        'PASSWORD': 'postgres',
+        'HOST': 'db',
         'PORT': '5432',
     }
 }
@@ -124,10 +124,34 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/2.1/howto/static-files/
 
 STATIC_URL = '/static/'
+STATIC_ROOT = os.path.join(BASE_DIR, 'static')
+
+# Rabbitmq settings
+
+RABBITMQ_HOST = os.environ.get('RABBITMQ_HOST', 'rabbitmq')
+RABBITMQ_PORT = os.environ.get('RABBITMQ_PORT', '5672')
+RABBITMQ_USER = os.environ.get('RABBITMQ_DEFAULT_USER', 'admin')
+RABBITMQ_PASS = os.environ.get('RABBITMQ_DEFAULT_PASS', '123')
+RABBITMQ_VHOST = os.environ.get('RABBITMQ_VHOST', '')
+
+BROKER_URL = 'amqp://{user}:{password}@{hostname}/{vhost}/'.format(
+    user=RABBITMQ_USER,
+    password=RABBITMQ_PASS,
+    hostname=RABBITMQ_HOST,
+    vhost=RABBITMQ_VHOST,
+)
 
 # Celery settings
 
-CELERY_BROKER_URL = 'amqp://localhost:5672'
+# Not sure that this setting should be used
+
+# CELERY_BROKER_URL = 'amqp://{user}:{password}@{hostname}/{vhost}:{port}/'.format(
+#     user=RABBITMQ_USER,
+#     password=RABBITMQ_PASS,
+#     hostname=RABBITMQ_HOST,
+#     vhost=RABBITMQ_VHOST,
+#     port=RABBITMQ_PORT
+# )
 
 
 # REST Framework settings
