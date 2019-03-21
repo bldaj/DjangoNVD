@@ -1,6 +1,12 @@
 # DjangoNVD
 
-# Run tasks
-To run tasks just type:
+## Running server and celery tasks
+### Requirements
+For running server and tasks you have to install [docker](https://www.docker.com/).
 
-```celery -A NVD worker -B -l INFO```
+### Launch
+To start server and tasks all you need is type:
+
+```bash
+$ docker-compose up -d
+```
