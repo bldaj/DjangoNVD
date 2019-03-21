@@ -19,7 +19,7 @@ app.conf.beat_schedule = {
     },
     'parser': {
         'task': 'backend.tasks.parser',
-        'schedule': crontab(hour=1, minute=0),
+        'schedule': crontab(hour=1, minute=30),
         'args': {}
     }
 }
