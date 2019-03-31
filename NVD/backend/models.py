@@ -25,3 +25,8 @@ class CVE(models.Model):
 
     def __str__(self):
         return self.cve_id
+
+
+class YearsVulnerabilitiesCount(models.Model):
+    year = models.IntegerField(unique=True)
+    vulnerabilities_count = models.IntegerField()
