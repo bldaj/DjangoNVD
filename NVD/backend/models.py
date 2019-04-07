@@ -1,5 +1,5 @@
 from django.db import models
-from django.contrib.postgres.fields import ArrayField
+from django.contrib.postgres.fields import ArrayField, JSONField
 
 
 class CVE(models.Model):
@@ -19,7 +19,7 @@ class CVE(models.Model):
     cpes = ArrayField(
         models.TextField()
     )
-    impact = models.TextField()
+    impact = JSONField()
     published_date = models.TextField(null=False)
     last_modified_date = models.TextField(null=False)
 
