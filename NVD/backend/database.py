@@ -12,6 +12,15 @@ from .utils import get_year_from_filename
 os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'NVD.settings')
 
 
+def get_cves_by_year(year: int):
+    return models.CVE.objects.filter(cve_id__contains=year)
+
+
+def create_or_update_most_vulnerable_vendors():
+    pass
+
+
+# TODO: rename it to `create_or_update_vulnerabilities_count`
 def update_vulnerabilities_count(filename: str, count: int):
     year = get_year_from_filename(filename)
 
@@ -29,6 +38,7 @@ def create_or_update_vulnerability(vulnerability: dict):
     )
 
 
+# TODO: try to move it into cve_parser module
 def create_or_update_vulnerabilities(vulnerabilities: list) -> int:
     count = 0
     for vulnerability in vulnerabilities:
