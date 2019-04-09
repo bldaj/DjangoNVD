@@ -19,6 +19,9 @@ def create_directory_structure():
     if not os.path.exists('backend/CVEs/JSONs'):
         os.mkdir('backend/CVEs/JSONs')
 
+    if not os.path.exists('backend/CVEs/CSV'):
+        os.mkdir('backend/CVEs/CSV')
+
 
 def read_archive(file_name: str):
     with gzip.open('backend/CVEs/Archives/{0}.gz'.format(file_name), 'rb') as f:
