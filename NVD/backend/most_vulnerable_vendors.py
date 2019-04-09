@@ -18,17 +18,22 @@ def deserialize_vendors(cves):
     return deserealized_vendors
 
 
+def save_csv_file_by_year(year: int, index: pd.Index):
+    index.to_csv(
+        'backend/CVEs/CSV/CVE-{year}.csv'.format(year=year),
+        sep=' ',
+        encoding='utf-8'
+    )
+
+
 def analyse_most_vulnerable_vendors():
     for year in range(START_YEAR, get_current_year()):
         cves = get_cves_by_year(year)
 
         deserialized_vendors = deserialize_vendors(cves)
 
-        index = pd.Index(deserialized_vendors).value_counts()
-
-        print(index)
-
-        index.to_csv('backend/pd/result.csv', sep='\t', encoding='utf-8')
+        index = pd.Index(deserialized_vendors).value_counts()[:10]
+        save_csv_file_by_year(year, index)
 
 
 def main():
