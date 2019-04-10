@@ -5,6 +5,8 @@ from datetime import datetime
 
 import requests
 
+from NVD.settings import START_YEAR
+
 url = 'https://nvd.nist.gov/feeds/json/cve/1.0/nvdcve-1.0-{0}.json.gz'
 archive_name = 'cve-{0}.json'
 
@@ -58,7 +60,7 @@ def create_archive_name_from_year(year: int) -> str:
 def download_and_unzip_cve_files_from_nvd():
     current_year = datetime.now().year
 
-    for year in range(2002, current_year):
+    for year in range(START_YEAR, current_year):
         file_name = create_archive_name_from_year(year)
 
         save_archive(
