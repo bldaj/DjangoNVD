@@ -16,8 +16,10 @@ def get_cves_by_year(year: int):
     return models.CVE.objects.filter(cve_id__contains=year)
 
 
-def create_or_update_most_vulnerable_vendors():
-    pass
+def create_or_update_most_vulnerable_vendors(vulnerable_vendor: dict):
+    models.MostVulnerableVendors.objects.update_or_create(
+        **vulnerable_vendor
+    )
 
 
 # TODO: rename it to `create_or_update_vulnerabilities_count`
