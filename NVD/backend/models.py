@@ -30,3 +30,12 @@ class CVE(models.Model):
 class YearsVulnerabilitiesCount(models.Model):
     year = models.IntegerField(unique=True)
     vulnerabilities_count = models.IntegerField()
+
+
+class MostVulnerableVendors(models.Model):
+    vendor = models.TextField(null=False, blank=False)
+    vulnerabilities_count = models.IntegerField(null=False, blank=False)
+    year = models.IntegerField(null=False, blank=False)
+
+    class Meta:
+        ordering = ['year']
