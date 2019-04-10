@@ -1,6 +1,6 @@
 import os
 
-from .database import create_or_update_vulnerabilities
+from .database import create_or_update_vulnerabilities, update_vulnerabilities_count
 from .utils import read_cve_json_file
 from .cve_item import CVEItem
 
@@ -27,7 +27,8 @@ def parse_cves_files(filenames):
     for filename in filenames:
         cve_items = parse_cve_items(read_cve_json_file(filename).get('CVE_Items', []))
 
-        create_or_update_vulnerabilities(cve_items)
+        count = create_or_update_vulnerabilities(cve_items)
+        update_vulnerabilities_count(filename, count)
 
 
 def main():

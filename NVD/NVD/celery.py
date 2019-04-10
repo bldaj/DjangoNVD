@@ -15,11 +15,13 @@ app.conf.beat_schedule = {
     'downloader': {
         'task': 'backend.tasks.downloader',
         'schedule': crontab(hour=1, minute=0),
-        'args': ()
     },
     'parser': {
         'task': 'backend.tasks.parser',
         'schedule': crontab(hour=1, minute=30),
-        'args': {}
+    },
+    'vendors_analyser': {
+        'task': 'backend.tasks.vendors_analyser',
+        'schedule': crontab(hour=22, minute=0)
     }
 }

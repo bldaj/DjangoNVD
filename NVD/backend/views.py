@@ -1,9 +1,14 @@
-from rest_framework import viewsets
+from rest_framework import viewsets, generics
 
-from .models import CVE
-from .serializers import CVESerializer
+from . import models
+from . import serializers
+
+
+class YearsVulnerabilitiesCountViewSet(generics.ListAPIView):
+    queryset = models.YearsVulnerabilitiesCount.objects.all()
+    serializer_class = serializers.YearsVulnerabilitiesCountSerializer
 
 
 class CVEViewSet(viewsets.ReadOnlyModelViewSet):
-    queryset = CVE.objects.all()
-    serializer_class = CVESerializer
+    queryset = models.CVE.objects.all()
+    serializer_class = serializers.CVESerializer
