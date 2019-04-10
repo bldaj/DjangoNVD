@@ -46,7 +46,7 @@ def save_csv_file_by_year(year: int, index: pd.Index):
 
 
 def save_data_to_db():
-    for year in range(2002, get_current_year()):
+    for year in range(START_YEAR, get_current_year()):
         vulnerable_vendors = read_csv_file(year)
 
         for vulnerable_vendor in vulnerable_vendors:
@@ -54,7 +54,7 @@ def save_data_to_db():
 
 
 def analyse_most_vulnerable_vendors():
-    for year in range(2002, get_current_year()):
+    for year in range(START_YEAR, get_current_year()):
         cves = get_cves_by_year(year)
 
         deserialized_vendors = deserialize_vendors(cves)
