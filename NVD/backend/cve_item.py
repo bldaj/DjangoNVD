@@ -102,7 +102,7 @@ class CVEItem:
             'references': self.references,
             'descriptions': self.descriptions,
             'cpes': self.cpes,
-            'impact': json.dumps(self.impact),
+            'impact': self.impact,
             'published_date': self.published_date,
             'last_modified_date': self.last_modified_date
         }

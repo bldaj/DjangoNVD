@@ -1,5 +1,5 @@
 from django.db import models
-from django.contrib.postgres.fields import ArrayField
+from django.contrib.postgres.fields import ArrayField, JSONField
 
 
 class CVE(models.Model):
@@ -19,9 +19,23 @@ class CVE(models.Model):
     cpes = ArrayField(
         models.TextField()
     )
-    impact = models.TextField()
+    impact = JSONField()
     published_date = models.TextField(null=False)
     last_modified_date = models.TextField(null=False)
 
     def __str__(self):
         return self.cve_id
+
+
+class YearsVulnerabilitiesCount(models.Model):
+    year = models.IntegerField(unique=True)
+    vulnerabilities_count = models.IntegerField()
+
+
+class MostVulnerableVendors(models.Model):
+    vendor = models.TextField(null=False, blank=False)
+    vulnerabilities_count = models.IntegerField(null=False, blank=False)
+    year = models.IntegerField(null=False, blank=False)
+
+    class Meta:
+        ordering = ['year']
