@@ -22,6 +22,6 @@ app.conf.beat_schedule = {
     },
     'vendors_analyser': {
         'task': 'backend.tasks.vendors_analyser',
-        'schedule': crontab(hour=22, minute=0)
+        'schedule': crontab(hour=2, minute=0),
     }
 }
