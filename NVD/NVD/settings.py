@@ -143,6 +143,8 @@ BROKER_URL = 'amqp://{user}:{password}@{hostname}/{vhost}/'.format(
 
 # Celery settings
 
+CELERY_IMPORTS = ('backend.tasks', )
+
 # Not sure that this setting should be used
 
 # CELERY_BROKER_URL = 'amqp://{user}:{password}@{hostname}/{vhost}:{port}/'.format(
