@@ -17,3 +17,11 @@ class YearsVulnerabilitiesCountSerializer(serializers.ModelSerializer):
         fields = (
             'year', 'vulnerabilities_count'
         )
+
+
+class MostVulnerableVendorsSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = models.MostVulnerableVendors
+        fields = (
+            'vendor', 'vulnerabilities_count', 'year'
+        )
