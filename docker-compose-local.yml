@@ -1,0 +1,57 @@
+version: '3'
+
+services:
+  nginx:
+    image: nginx:1.15.9
+    container_name: ng
+    ports:
+      - "80:8000"
+    volumes:
+      - ./NVD:/src
+      - ./config/nginx:/etc/nginx/conf.d
+    depends_on:
+      - api
+
+  api:
+    build: .
+    container_name: api
+    env_file:
+      - config/envs/rabbitmq.env
+      - config/envs/postgres.env
+    command: ['./scripts/wait-for-postgres.sh', 'db', './scripts/run_server.sh']
+    depends_on:
+      - db
+    volumes:
+      - .:/src
+    expose:
+      - "8000"
+
+  tasks:
+    build: .
+    container_name: celery_tasks
+    env_file:
+      - config/envs/rabbitmq.env
+      - config/envs/postgres.env
+    command: ['./scripts/wait-for-postgres.sh', 'db', './scripts/run_tasks.sh']
+    depends_on:
+      - db
+      - rabbitmq
+    volumes:
+      - .:/src
+
+  rabbitmq:
+    image: rabbitmq:3
+    container_name: rabbitmq
+    env_file:
+      - config/envs/rabbitmq.env
+    ports:
+      - "5672:5672"  # We forward this port because it's useful for debugging
+      - "15672:15672"  # Here, we can access RabbitMQ management plugin
+
+  db:
+    image: postgres:11
+    container_name: pg
+    env_file:
+      - config/envs/postgres.env
+    volumes:
+      - ./db:/var/lib/postgresql/data
