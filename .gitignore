@@ -6,3 +6,6 @@
 
 #CVE files
 CVEs
+
+# celery beat schedule file
+celerybeat-schedule
