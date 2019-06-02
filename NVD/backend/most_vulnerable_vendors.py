@@ -4,7 +4,7 @@ import csv
 import pandas as pd
 
 from NVD.settings import START_YEAR
-from .database import get_cves_by_year, create_or_update_most_vulnerable_vendors
+from .database import get_cves_by_year, create_or_update_most_vulnerable_vendors, limit_most_vulnerable_vendors
 from .utils import get_current_year
 
 CVE_PREFIX = 'CVE'
@@ -45,6 +45,10 @@ def save_csv_file_by_year(year: int, index: pd.Index):
     )
 
 
+def db_limit(limit: int = 10):
+    limit_most_vulnerable_vendors(limit)
+
+
 def save_data_to_db():
     for year in range(START_YEAR, get_current_year()):
         vulnerable_vendors = read_csv_file(year)
@@ -66,6 +70,7 @@ def analyse_most_vulnerable_vendors():
 def main():
     analyse_most_vulnerable_vendors()
     save_data_to_db()
+    db_limit()
 
 
 if __name__ == '__main__':

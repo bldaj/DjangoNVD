@@ -7,7 +7,8 @@ Used for making operations with PostgresQL.
 import os
 
 from . import models
-from .utils import get_year_from_filename
+from NVD.settings import START_YEAR
+from .utils import get_year_from_filename, get_current_year
 
 os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'NVD.settings')
 
@@ -20,6 +21,12 @@ def create_or_update_most_vulnerable_vendors(vulnerable_vendor: dict):
     models.MostVulnerableVendors.objects.update_or_create(
         **vulnerable_vendor
     )
+
+
+def limit_most_vulnerable_vendors(limit: int):
+    for year in range(START_YEAR, get_current_year()):
+        ids = models.MostVulnerableVendors.objects.all().filter(year=year).values('id')[:limit]
+        models.MostVulnerableVendors.objects.filter(year=year).exclude(pk__in=ids).delete()
 
 
 # TODO: rename it to `create_or_update_vulnerabilities_count`
