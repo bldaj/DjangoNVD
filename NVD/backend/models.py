@@ -34,6 +34,9 @@ class YearsVulnerabilitiesCount(models.Model):
     year = models.IntegerField(unique=True)
     vulnerabilities_count = models.IntegerField()
 
+    class Meta:
+        ordering = ['year']
+
 
 class MostVulnerableVendors(models.Model):
     vendor = models.TextField(null=False, blank=False)
@@ -41,4 +44,4 @@ class MostVulnerableVendors(models.Model):
     year = models.IntegerField(null=False, blank=False)
 
     class Meta:
-        ordering = ['year']
+        ordering = ['-vulnerabilities_count']
