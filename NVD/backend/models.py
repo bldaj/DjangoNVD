@@ -52,3 +52,6 @@ class CVSS(models.Model):
     year = models.PositiveSmallIntegerField()
     score = models.PositiveSmallIntegerField()
     count = models.PositiveSmallIntegerField()
+
+    class Meta:
+        ordering = ['year']
