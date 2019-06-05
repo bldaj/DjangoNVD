@@ -25,3 +25,9 @@ class MostVulnerableVendorsSerializer(serializers.ModelSerializer):
         fields = (
             'vendor', 'vulnerabilities_count', 'year'
         )
+
+
+class CVSSSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = models.CVSS
+        exclude = ('id',)
