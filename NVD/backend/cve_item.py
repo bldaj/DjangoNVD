@@ -25,6 +25,7 @@ class CVEItem:
         self.impact = cve_item.get('impact', {})
         self.published_date = cve_item.get('publishedDate', None)
         self.last_modified_date = cve_item.get('lastModifiedDate', None)
+        self.year = self.get_cve_year()
 
         # Vendors: vendor name, product name, product versions
         vendor_data = cve.get('affects', {}).get('vendor', {}).get('vendor_data', [])
@@ -94,6 +95,9 @@ class CVEItem:
         del configurations
         del nodes
 
+    def get_cve_year(self):
+        return self.id.split('-')[1]
+
     def to_dict(self):
         return {
             'cve_id': self.id,
@@ -104,5 +108,6 @@ class CVEItem:
             'cpes': self.cpes,
             'impact': self.impact,
             'published_date': self.published_date,
-            'last_modified_date': self.last_modified_date
+            'last_modified_date': self.last_modified_date,
+            'year': self.year
         }
