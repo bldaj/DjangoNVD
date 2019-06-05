@@ -22,6 +22,7 @@ class CVE(models.Model):
     impact = JSONField()
     published_date = models.TextField(null=False)
     last_modified_date = models.TextField(null=False)
+    year = models.PositiveSmallIntegerField(null=True)
 
     def __str__(self):
         return self.cve_id
@@ -45,3 +46,9 @@ class MostVulnerableVendors(models.Model):
 
     class Meta:
         ordering = ['-vulnerabilities_count']
+
+
+class CVSS(models.Model):
+    year = models.PositiveSmallIntegerField()
+    score = models.PositiveSmallIntegerField()
+    count = models.PositiveSmallIntegerField()
