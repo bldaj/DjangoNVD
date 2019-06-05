@@ -5,6 +5,7 @@ from . import views
 
 router = DefaultRouter()
 router.register('cves', views.CVEViewSet, basename='cve')
+router.register('cvss_score', views.CVSSViewSet, basename='cvss')
 
 urlpatterns = [
     path('', include(router.urls)),
