@@ -16,13 +16,13 @@ app.conf.beat_schedule = {
         'task': 'backend.tasks.downloader',
         'schedule': crontab(hour=1, minute=0),
     },
-    'cvss_analyzer': {
-        'task': 'backend.tasks.cvss_analyzer',
-        'schedule': crontab(hour=1, minute=30)
-    },
     'parser': {
         'task': 'backend.tasks.parser',
-        'schedule': crontab(hour=1, minute=40),
+        'schedule': crontab(hour=1, minute=30),
+    },
+    'cvss_analyzer': {
+        'task': 'backend.tasks.cvss_analyzer',
+        'schedule': crontab(hour=2, minute=00)
     },
     'vendors_analyser': {
         'task': 'backend.tasks.vendors_analyser',
